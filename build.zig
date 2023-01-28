@@ -486,24 +486,7 @@ pub fn build(b: *Builder) void {
     // We could fix this by moving the ziglings code to a separate file,
     // but 0.5.0 was a long time ago, it is unlikely that anyone who
     // attempts these exercises is still using it.
-    if (comptime !checkVersion()) {
-        // very old versions of Zig used warn instead of print.
-        const stderrPrintFn = if (@hasDecl(std.debug, "print")) std.debug.print else std.debug.warn;
-        stderrPrintFn(
-            \\ERROR: Sorry, it looks like your version of zig is too old. :-(
-            \\
-            \\Ziglings requires development build
-            \\
-            \\    {}
-            \\
-            \\or higher. Please download a development ("master") build from
-            \\
-            \\    https://ziglang.org/download/
-            \\
-            \\
-        , .{needed_version});
-        std.os.exit(0);
-    }
+
 
     use_color_escapes = false;
     switch (b.color) {
